@@ -6,11 +6,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int health = 3;
-    
+    public Vector2 currentPosition;
     
     private float horizontalInput;
     private float speed = 7f;
     private float maxVelocity = 10f;
+
+    private bool goingRight = true;
     
     private Rigidbody2D rb;
     

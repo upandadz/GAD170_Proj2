@@ -5,16 +5,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public Object spawnObject;
-    
-    // Start is called before the first frame update
+
+    private int spawnRoll;
+
     void Start()
     {
-        
+        spawnRoll = Random.Range(1, 3);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
