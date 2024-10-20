@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public ButtonPress buttonPress;
+    public Canvas uiCanvas;
 
     public bool gameStarted = false;
     // Start is called before the first frame update
@@ -17,5 +18,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D Player)
+    {
+        uiCanvas.enabled = true; // not working
+    }
+
+    private void OnTriggerExit2D(Collider2D Player)
+    {
+        uiCanvas.enabled = false; // by default also not working
     }
 }

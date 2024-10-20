@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+    public GameManager gameManager;
     public int health = 3;
-    public Vector2 currentPosition;
+    public float maxVelocity = 10f;
     
     private float horizontalInput;
     private float speed = 7f;
-    private float maxVelocity = 10f;
+
 
     private bool goingRight = true;
     
@@ -36,5 +38,20 @@ public class Player : MonoBehaviour
         
         // clamps the Y velocity so player does not hit light speed
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+        
+        // if game has started, press spacebar to change direction
+        if (gameManager.gameStarted)
+        {
+            if(goingRight && Input.GetKeyDown(KeyCode.Space))
+            {
+                goingRight = false;
+                rb.velocity = new Vector2(100, rb.velocity.y);
+            }   
+            else if(!goingRight && Input.GetKeyDown(KeyCode.Space))
+            {
+                goingRight = true;
+                rb.velocity = new Vector2(-100, rb.velocity.y);
+            }
+        }
     }
 }
