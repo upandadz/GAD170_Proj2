@@ -27,31 +27,38 @@ public class Player : MonoBehaviour
     void Update()
     {
         // if game hasn't started yet, able to move left & right
-        if (rb.gravityScale == 2)
+        if (!gameManager.gameStarted)
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }
     }
     void FixedUpdate()
     {
-        // left & right movement
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-        
+        // left & right movement pre game start
+        if (!gameManager.gameStarted)
+        {
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        }
+
         // clamps the Y velocity so player does not hit light speed
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
         
         // if game has started, press spacebar to change direction
         if (gameManager.gameStarted)
         {
-            if(goingRight && Input.GetKeyDown(KeyCode.Space))
-            {
-                goingRight = false;
-                rb.velocity = new Vector2(100, rb.velocity.y); // not working as intended
-            }   
-            else if(!goingRight && Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.D))
             {
                 goingRight = true;
-                rb.velocity = new Vector2(-100, rb.velocity.y); // not working as intended
+                // rb.velocity = new Vector2(-500, rb.velocity.y); // not working as intended
+                // Physics2D.gravity = new Vector2(10, -1);
+                rb.velocity = new Vector2(1f * speed, rb.velocity.y); // not quite working
+            }   
+            else if(Input.GetKeyDown(KeyCode.A))
+            {
+                goingRight = false;
+                // rb.velocity = new Vector2(500, rb.velocity.y); // not working as intended
+                // Physics2D.gravity = new Vector2(10, -1);
+                rb.velocity = new Vector2(-1f * speed, rb.velocity.y); // not quite working
             }
         }
     }
