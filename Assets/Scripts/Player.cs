@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     
     public GameManager gameManager;
     public int health = 3;
+    public int coinCount = 0;
     public float maxVelocity = 10f;
     
     private float horizontalInput;
@@ -45,12 +46,12 @@ public class Player : MonoBehaviour
             if(goingRight && Input.GetKeyDown(KeyCode.Space))
             {
                 goingRight = false;
-                rb.velocity = new Vector2(100, rb.velocity.y);
+                rb.velocity = new Vector2(100, rb.velocity.y); // not working as intended
             }   
             else if(!goingRight && Input.GetKeyDown(KeyCode.Space))
             {
                 goingRight = true;
-                rb.velocity = new Vector2(-100, rb.velocity.y);
+                rb.velocity = new Vector2(-100, rb.velocity.y); // not working as intended
             }
         }
     }

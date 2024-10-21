@@ -6,13 +6,13 @@ using UnityEngine;
 public class ButtonPress : MonoBehaviour
 {
     public Rigidbody2D player;
-    public GameManager gameManager;
+    private GameManager gameManager;
 
     public bool startPressed = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
