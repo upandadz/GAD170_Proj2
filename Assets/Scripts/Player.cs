@@ -9,10 +9,11 @@ public class Player : MonoBehaviour
     public GameManager gameManager;
     public int health = 3;
     public int coinCount = 0;
-    public float maxVelocity = 10f;
+    public float maxVelocity = 1000f;
     
     private float horizontalInput;
     private float speed = 7f;
+    private float jumpForce = 40f;
 
 
     private bool goingRight = true;
@@ -31,6 +32,23 @@ public class Player : MonoBehaviour
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }
+        
+        if (gameManager.gameStarted)
+        {
+            if(Input.GetKeyDown(KeyCode.D)) // and touching wall, change to space
+            {
+                goingRight = true;
+                rb.velocity = new Vector2(jumpForce, rb.velocity.y);
+            }   
+            if(Input.GetKeyDown(KeyCode.A)) // and touching wall, change to space
+            {
+                goingRight = false;
+                rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
+            }
+            
+            // if press button down and not touching wall, hold in one spot until button up (for max amount of time)
+            // change colour while doing so
+        }
     }
     void FixedUpdate()
     {
@@ -39,27 +57,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
         }
-
-        // clamps the Y velocity so player does not hit light speed
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
-        
-        // if game has started, press spacebar to change direction
-        if (gameManager.gameStarted)
-        {
-            if(Input.GetKeyDown(KeyCode.D))
-            {
-                goingRight = true;
-                // rb.velocity = new Vector2(-500, rb.velocity.y); // not working as intended
-                // Physics2D.gravity = new Vector2(10, -1);
-                rb.velocity = new Vector2(1f * speed, rb.velocity.y); // not quite working
-            }   
-            else if(Input.GetKeyDown(KeyCode.A))
-            {
-                goingRight = false;
-                // rb.velocity = new Vector2(500, rb.velocity.y); // not working as intended
-                // Physics2D.gravity = new Vector2(10, -1);
-                rb.velocity = new Vector2(-1f * speed, rb.velocity.y); // not quite working
-            }
-        }
+       
+        // clamp y velocity
     }
 }

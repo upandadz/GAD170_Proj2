@@ -15,12 +15,6 @@ public class ButtonPress : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D Player)
     {
         gameManager.gameStarted = true;

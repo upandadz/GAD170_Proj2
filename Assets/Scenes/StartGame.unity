@@ -155,6 +155,7 @@ MonoBehaviour:
   buttonPress: {fileID: 389096146}
   uiCanvas: {fileID: 485407535}
   gameStarted: 0
+  gameOver: 0
 --- !u!4 &159710183
 Transform:
   m_ObjectHideFlags: 0
@@ -516,7 +517,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1453653022}
-  gameManager: {fileID: 159710182}
   startPressed: 0
 --- !u!61 &389096147
 BoxCollider2D:
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 394690565}
   - component: {fileID: 394690564}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Timer/Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 159710182}
   health: 3
+  coinCount: 0
   maxVelocity: 10
 --- !u!1 &2115857606
 GameObject:
@@ -1756,6 +1757,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 485407536}
   - {fileID: 689167526}
   - {fileID: 1363993656}
   - {fileID: 1453653021}
@@ -1768,4 +1770,3 @@ SceneRoots:
   - {fileID: 159710183}
   - {fileID: 394690567}
   - {fileID: 195855056}
-  - {fileID: 485407536}

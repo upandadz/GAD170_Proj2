@@ -13,7 +13,12 @@ public class Spikes : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D Player)
     {
         player.health -= 1;
-        // coin count - 3
+        
+        player.coinCount -= 3;
+        if (player.coinCount < 0)
+        {
+            player.coinCount = 0;
+        }
         // update player health bar
     }
 }

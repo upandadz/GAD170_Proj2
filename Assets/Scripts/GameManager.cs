@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public Canvas uiCanvas;
 
     public bool gameStarted = false;
+
+    public bool gameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,4 +31,6 @@ public class GameManager : MonoBehaviour
     {
         uiCanvas.enabled = false; // by default also not working
     }
+    
+    // if game over, final score = time + enemies killed, coins collected
 }
