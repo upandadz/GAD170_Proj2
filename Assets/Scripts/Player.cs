@@ -5,21 +5,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
+    private Rigidbody2D rb;
     public GameManager gameManager;
     public int health = 3;
     public int coinCount = 0;
-    public float maxVelocity = 1000f;
     
+    // movement
     private float horizontalInput;
     private float speed = 7f;
     private float jumpForce = 40f;
-
-
+    private Vector2 clampValue;
+    private float maxVelocity = 100f;
+    
+    // states
     private bool goingRight = true;
-    
-    private Rigidbody2D rb;
-    
+
+    // groundcheck
+    public Vector2 boxSize;
+    public float castDistance;
+    public LayerMask wallLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,7 +31,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // if game hasn't started yet, able to move left & right
         if (!gameManager.gameStarted)
         {
             horizontalInput = Input.GetAxis("Horizontal");
@@ -35,12 +38,12 @@ public class Player : MonoBehaviour
         
         if (gameManager.gameStarted)
         {
-            if(Input.GetKeyDown(KeyCode.D)) // and touching wall, change to space
+            if(Input.GetKeyDown(KeyCode.D) && CanJump()) // and touching wall
             {
                 goingRight = true;
                 rb.velocity = new Vector2(jumpForce, rb.velocity.y);
             }   
-            if(Input.GetKeyDown(KeyCode.A)) // and touching wall, change to space
+            if(Input.GetKeyDown(KeyCode.A) && CanJump()) // and touching wall
             {
                 goingRight = false;
                 rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
@@ -57,7 +60,30 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
         }
-       
-        // clamp y velocity
+        
+        // clamps the Y velocity so it doesn't break the game
+        clampValue = rb.velocity;
+        clampValue.y = Mathf.Clamp(clampValue.y, -maxVelocity, maxVelocity);
+        rb.velocity = clampValue;
+
     }
+
+    private bool CanJump()
+    {
+        if (Physics2D.BoxCast(transform.position, boxSize, 0, transform.forward, castDistance, wallLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    /* // just to visualise the box cast distance
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position-transform.up * castDistance, boxSize);
+    }
+    */
 }
