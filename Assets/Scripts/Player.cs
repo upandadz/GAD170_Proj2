@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private float speed = 7f;
     private float jumpForce = 40f;
     private Vector2 clampValue;
-    private float maxVelocity = 40f;
+    private float maxVelocity = 20f;
     private Vector2 velocity;
 
     [Header("States")] 
