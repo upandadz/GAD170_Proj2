@@ -7,23 +7,29 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     public GameManager gameManager;
+    [Space]
+    [Header("Player Stats")]
     public int health = 3;
     public int coinCount = 0;
     
-    // movement
+    [Header("Ground check")]
+    public Vector2 boxSize;
+    public float castDistance;
+    public LayerMask wallLayer;
+    
+    [Header("Movement")]
     private float horizontalInput;
     private float speed = 7f;
     private float jumpForce = 40f;
     private Vector2 clampValue;
-    private float maxVelocity = 100f;
-    
-    // states
+    private float maxVelocity = 40f;
+    private Vector2 velocity;
+
+    [Header("States")] 
+    private bool floating = false;
     private bool goingRight = true;
 
-    // groundcheck
-    public Vector2 boxSize;
-    public float castDistance;
-    public LayerMask wallLayer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,19 +44,40 @@ public class Player : MonoBehaviour
         
         if (gameManager.gameStarted)
         {
-            if(Input.GetKeyDown(KeyCode.D) && CanJump()) // and touching wall
+            if(Input.GetKeyDown(KeyCode.D) && CanJump())
             {
                 goingRight = true;
                 rb.velocity = new Vector2(jumpForce, rb.velocity.y);
             }   
-            if(Input.GetKeyDown(KeyCode.A) && CanJump()) // and touching wall
+            if(Input.GetKeyDown(KeyCode.A) && CanJump())
             {
                 goingRight = false;
                 rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
             }
-            
-            // if press button down and not touching wall, hold in one spot until button up (for max amount of time)
+
+            if (goingRight && rb.velocity.x == 0 && !floating)
+            {
+                rb.velocity = new Vector2(jumpForce, rb.velocity.y);
+            }
+
+            if (!goingRight && rb.velocity.x == 0 && !floating)
+            {
+                rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
+            }
+
+            if ((rb.velocity.x > 0 || rb.velocity.x < 0) && Input.GetKeyDown(KeyCode.Space))
+            {
+                velocity = rb.velocity;
+                floating = true;
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            // limit time somehow
             // change colour while doing so
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                rb.velocity = velocity;
+                floating = false;
+            }
         }
     }
     void FixedUpdate()
@@ -68,7 +95,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private bool CanJump()
+    public bool CanJump()
     {
         if (Physics2D.BoxCast(transform.position, boxSize, 0, transform.forward, castDistance, wallLayer))
         {

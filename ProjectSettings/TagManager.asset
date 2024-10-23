@@ -10,6 +10,7 @@ TagManager:
   - Spikes
   - Enemy
   - Walls
+  - Walls
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Walls
   - 
   - 
   - 

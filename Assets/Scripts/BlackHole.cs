@@ -16,13 +16,13 @@ public class BlackHole : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         player = FindObjectOfType<Player>();
         playerRB = player.GetComponent<Rigidbody2D>();
-        blackHoleTransform = GetComponent<Transform>();
+        blackHoleTransform = this.transform;
     }
 
     void Update()
     {
         // rotates blackhole
-        blackHoleTransform.Rotate(Vector3.forward, -150 * Time.deltaTime);
+        transform.Rotate(Vector3.forward*90*Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D Player)

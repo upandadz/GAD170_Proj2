@@ -16,6 +16,6 @@ public class WallSpawner : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D Player)
     {
-        Instantiate(walls, new Vector2(-9, transform.position.y + 12), Quaternion.identity);
+        Instantiate(walls, new Vector2(-9, transform.position.y + 14), Quaternion.identity);
     }
 }
