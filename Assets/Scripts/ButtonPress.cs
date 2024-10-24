@@ -9,7 +9,6 @@ public class ButtonPress : MonoBehaviour
     private GameManager gameManager;
 
     public bool startPressed = false;
-    // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();

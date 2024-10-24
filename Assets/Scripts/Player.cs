@@ -22,11 +22,12 @@ public class Player : MonoBehaviour
     private float speed = 7f;
     private float jumpForce = 40f;
     private Vector2 clampValue;
-    private float maxVelocity = 20f;
+    private float maxVelocity = 10f;
     private Vector2 velocity;
+    private float timeToWait = 0;
 
     [Header("States")] 
-    private bool floating = false;
+    public bool floating = false;
     private bool goingRight = true;
 
 
@@ -44,11 +45,13 @@ public class Player : MonoBehaviour
         
         if (gameManager.gameStarted)
         {
+            // right jump
             if(Input.GetKeyDown(KeyCode.D) && CanJump())
             {
                 goingRight = true;
                 rb.velocity = new Vector2(jumpForce, rb.velocity.y);
             }   
+            // left jump
             if(Input.GetKeyDown(KeyCode.A) && CanJump())
             {
                 goingRight = false;
@@ -64,17 +67,28 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
             }
-
+            
+            // floating 
             if ((rb.velocity.x > 0 || rb.velocity.x < 0) && Input.GetKeyDown(KeyCode.Space))
             {
                 velocity = rb.velocity;
                 floating = true;
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
-            // limit time somehow
+            else if (Input.GetKey(KeyCode.Space))
+            {
+                timeToWait += Time.deltaTime;
+                if (timeToWait > 0.4f) // stops player floating too long
+                {
+                    timeToWait = 0;
+                    rb.velocity = velocity;
+                    floating = false;
+                }
+            }
             // change colour while doing so
             else if (Input.GetKeyUp(KeyCode.Space))
             {
+                timeToWait = 0;
                 rb.velocity = velocity;
                 floating = false;
             }
@@ -92,7 +106,6 @@ public class Player : MonoBehaviour
         clampValue = rb.velocity;
         clampValue.y = Mathf.Clamp(clampValue.y, -maxVelocity, maxVelocity);
         rb.velocity = clampValue;
-
     }
 
     public bool CanJump()
@@ -106,7 +119,12 @@ public class Player : MonoBehaviour
             return false;
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log(other.gameObject.name);
+    }
+
     /* // just to visualise the box cast distance
     private void OnDrawGizmos()
     {

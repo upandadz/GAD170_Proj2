@@ -5,25 +5,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public ButtonPress buttonPress;
-    public Canvas uiCanvas;
 
+    [Header("Game States")]
     public bool gameStarted = false;
-
     public bool gameOver = false;
+
+    public float gameTime;
     void Update()
     {
-        
+        if (gameStarted)
+        {
+            gameTime += Time.deltaTime;
+        }
     }
-
-    private void OnTriggerEnter2D(Collider2D Player)
-    {
-        uiCanvas.enabled = true; // not working
-    }
-
-    private void OnTriggerExit2D(Collider2D Player)
-    {
-        uiCanvas.enabled = false; // by default also not working
-    }
-    
     // if game over, final score = time + enemies killed, coins collected
 }
