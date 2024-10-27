@@ -22,7 +22,7 @@ public class BlackHole : MonoBehaviour
     void Update()
     {
         // rotates blackhole
-        transform.Rotate(Vector3.forward,-150*Time.deltaTime);
+        // transform.Rotate(Vector3.forward,-150*Time.deltaTime); // causing issues when nested within another prefab
     }
 
     private void OnTriggerEnter2D(Collider2D Player)

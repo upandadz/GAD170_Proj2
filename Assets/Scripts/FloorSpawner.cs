@@ -5,12 +5,21 @@ using UnityEngine;
 public class FloorSpawner : MonoBehaviour
 {
     public GameObject floor;
+    private ObstaclePrefabs prefabs;
  
     void Start()
     {
+        prefabs = FindObjectOfType<ObstaclePrefabs>();
+        int roll = Random.Range(1, 3);
         // do a random roll to find different prefab walls
-        
-        floor = GameObject.Find("Floor"); // floor can = different prefab depending on roll
+        if (roll == 1)
+        {
+            floor = prefabs.prefabOne;
+        }
+        else if (roll == 2)
+        {
+            floor = prefabs.prefabTwo;
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D Player)
