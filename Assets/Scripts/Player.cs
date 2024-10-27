@@ -19,16 +19,14 @@ public class Player : MonoBehaviour
     
     [Header("Movement")]
     private float horizontalInput;
-    private float speed = 7f;
-    private float jumpForce = 40f;
+    private float speed = 10f;
     private Vector2 clampValue;
-    private float maxVelocity = 10f;
     private Vector2 velocity;
+    private float gravity;
     private float timeToWait = 0;
 
     [Header("States")] 
     public bool floating = false;
-    private bool goingRight = true;
 
 
     void Start()
@@ -45,52 +43,33 @@ public class Player : MonoBehaviour
         
         if (gameManager.gameStarted)
         {
-            // right jump
-            if(Input.GetKeyDown(KeyCode.D) && CanJump())
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            if (Input.GetMouseButtonDown(0) && CanJump() && !floating)
             {
-                goingRight = true;
-                rb.velocity = new Vector2(jumpForce, rb.velocity.y);
-            }   
-            // left jump
-            if(Input.GetKeyDown(KeyCode.A) && CanJump())
-            {
-                goingRight = false;
-                rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
-            }
-
-            if (goingRight && rb.velocity.x == 0 && !floating)
-            {
-                rb.velocity = new Vector2(jumpForce, rb.velocity.y);
-            }
-
-            if (!goingRight && rb.velocity.x == 0 && !floating)
-            {
-                rb.velocity = new Vector2(-jumpForce, rb.velocity.y);
+                rb.gravityScale *= -1;
             }
             
             // floating 
-            if ((rb.velocity.x > 0 || rb.velocity.x < 0) && Input.GetKeyDown(KeyCode.Space))
+            if ((rb.velocity.y > 0 || rb.velocity.y < 0) && Input.GetKeyDown(KeyCode.Space))
             {
+                gravity = rb.gravityScale;
                 velocity = rb.velocity;
                 floating = true;
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.gravityScale = 0;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
             else if (Input.GetKey(KeyCode.Space))
             {
                 timeToWait += Time.deltaTime;
                 if (timeToWait > 0.4f) // stops player floating too long
                 {
-                    timeToWait = 0;
-                    rb.velocity = velocity;
-                    floating = false;
+                    ResetMotion();
                 }
             }
             // change colour while doing so
             else if (Input.GetKeyUp(KeyCode.Space))
             {
-                timeToWait = 0;
-                rb.velocity = velocity;
-                floating = false;
+                ResetMotion();
             }
         }
     }
@@ -102,15 +81,11 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
         }
         
-        // clamps the Y velocity so it doesn't break the game
-        clampValue = rb.velocity;
-        clampValue.y = Mathf.Clamp(clampValue.y, -maxVelocity, maxVelocity);
-        rb.velocity = clampValue;
     }
 
     public bool CanJump()
     {
-        if (Physics2D.BoxCast(transform.position, boxSize, 0, transform.forward, castDistance, wallLayer))
+        if (Physics2D.BoxCast(transform.position, boxSize, 0, transform.up, castDistance, wallLayer))
         {
             return true;
         }
@@ -119,16 +94,18 @@ public class Player : MonoBehaviour
             return false;
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log(other.gameObject.name);
-    }
-
-    /* // just to visualise the box cast distance
+    
+    // To visualise the box cast distance
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position-transform.up * castDistance, boxSize);
     }
-    */
+
+    private void ResetMotion()
+    {
+        timeToWait = 0;
+        rb.gravityScale = gravity;
+        rb.velocity = velocity;
+        floating = false;
+    }
 }

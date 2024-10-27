@@ -17,6 +17,5 @@ public class ButtonPress : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D Player)
     {
         gameManager.gameStarted = true;
-        player.gravityScale = -1;
     }
 }

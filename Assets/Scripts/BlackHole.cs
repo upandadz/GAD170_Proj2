@@ -27,9 +27,9 @@ public class BlackHole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D Player)
     {
+        gameManager.gameStarted = false;
         playerRB.gravityScale = 0;
         playerRB.velocity = new Vector2(0, 0);
-        player.floating = true;
         // want to make it gradually go towards centre of blackhole
         playerRB.position = new Vector2(blackHoleTransform.position.x, blackHoleTransform.position.y);
         gameManager.gameOver = true;

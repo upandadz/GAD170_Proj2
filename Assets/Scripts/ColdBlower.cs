@@ -14,10 +14,17 @@ public class ColdBlower : MonoBehaviour
         playerRB = player.GetComponent<Rigidbody2D>();
     }
 
-    void OnTriggerStay2D(Collider2D Player)
+    void OnTriggerEnter2D(Collider2D Player)
     {
-        playerRB.velocity = new Vector2(playerRB.velocity.x*0.9f, playerRB.velocity.y*0.8f);
+        StartCoroutine(FreezePlayer());
     }
-    
+
+    private IEnumerator FreezePlayer()
+    {
+        player.floating = true;
+        yield return new WaitForSeconds(1f);
+        // change colour of player
+        player.floating = false;
+    }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class UI : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class UI : MonoBehaviour
     private GameManager gameManager;
     
     public TextMeshProUGUI timerText;
+
+    [Header("HP bar")]
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     void Start()
     {

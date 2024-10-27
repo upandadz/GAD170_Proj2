@@ -5,14 +5,20 @@ using UnityEngine;
 public class Spikes : MonoBehaviour
 {
     private Player player;
+    private GameManager gameManager;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        gameManager = FindObjectOfType<GameManager>();
     }
     private void OnTriggerEnter2D(Collider2D Player)
     {
         player.health -= 1;
+        if (player.health <= 0)
+        {
+            gameManager.gameOver = true;
+        }
         
         player.coinCount -= 3;
         if (player.coinCount < 0)
