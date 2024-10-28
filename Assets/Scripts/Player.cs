@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     public GameManager gameManager;
+    private SpriteRenderer spriteRenderer;
     [Space]
     [Header("Player Stats")]
     public int health = 3;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
                 floating = true;
                 rb.gravityScale = 0;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
+                spriteRenderer.color = Color.yellow;
             }
             else if (Input.GetKey(KeyCode.Space))
             {
@@ -110,5 +113,6 @@ public class Player : MonoBehaviour
         rb.gravityScale = gravity;
         rb.velocity = velocity;
         floating = false;
+        spriteRenderer.color = Color.white;
     }
 }
