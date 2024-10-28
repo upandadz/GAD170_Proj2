@@ -10,7 +10,7 @@ public class FloorSpawner : MonoBehaviour
     void Start()
     {
         prefabs = FindObjectOfType<ObstaclePrefabs>();
-        int roll = Random.Range(1, 3);
+        int roll = Random.Range(1, 4);
         // do a random roll to find different prefab walls
         if (roll == 1)
         {
@@ -19,6 +19,10 @@ public class FloorSpawner : MonoBehaviour
         else if (roll == 2)
         {
             floor = prefabs.prefabTwo;
+        }
+        else if (roll == 3)
+        {
+            floor = prefabs.prefabThree;
         }
     }
     

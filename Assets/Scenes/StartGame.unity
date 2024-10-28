@@ -265,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a7aa471c670c743aa072f1434cd6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabOne: {fileID: 741318090882763028, guid: e276c4c1685215546b968bb12914b4ee, type: 3}
-  prefabTwo: {fileID: 741318090882763028, guid: 0e4dde5101cc006449a42a7c260f8f56, type: 3}
+  prefabOne: {fileID: 741318090882763028, guid: 0e4dde5101cc006449a42a7c260f8f56, type: 3}
+  prefabTwo: {fileID: 741318090882763028, guid: d33daabac2a877e44ad5d07c3d0ca77f, type: 3}
   prefabThree: {fileID: 0}
 --- !u!4 &96684387
 Transform:

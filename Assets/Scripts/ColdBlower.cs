@@ -16,7 +16,10 @@ public class ColdBlower : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Player)
     {
-        StartCoroutine(FreezePlayer());
+        if (!player.floating)
+        {
+            StartCoroutine(FreezePlayer());
+        }
     }
 
     private IEnumerator FreezePlayer()

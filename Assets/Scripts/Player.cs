@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private Vector2 velocity;
     private float gravity;
     private float timeToWait = 0;
+    private bool canFloat = true;
 
     [Header("States")] 
     public bool floating = false;
@@ -50,8 +51,9 @@ public class Player : MonoBehaviour
             }
             
             // floating 
-            if ((rb.velocity.y > 0 || rb.velocity.y < 0) && Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && canFloat)
             {
+                canFloat = false;
                 gravity = rb.gravityScale;
                 velocity = rb.velocity;
                 floating = true;
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
             else if (Input.GetKey(KeyCode.Space))
             {
                 timeToWait += Time.deltaTime;
-                if (timeToWait > 0.4f) // stops player floating too long
+                if (timeToWait > 0.5f) // stops player floating too long
                 {
                     ResetMotion();
                 }
@@ -87,6 +89,7 @@ public class Player : MonoBehaviour
     {
         if (Physics2D.BoxCast(transform.position, boxSize, 0, transform.up, castDistance, wallLayer))
         {
+            canFloat = true;
             return true;
         }
         else
