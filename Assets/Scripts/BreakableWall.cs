@@ -22,7 +22,8 @@ public class BreakableWall : MonoBehaviour
         }
         else
         {
-            
+            Destroy(thisWall);
+            player.health -= 1;
         }
     }
 }
