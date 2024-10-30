@@ -4,9 +4,5 @@ using UnityEngine;
 
 public class ObstaclePrefabs : MonoBehaviour
 {
-    public GameObject prefabOne;
-    public GameObject prefabTwo;
-    public GameObject prefabThree;
-    public GameObject prefabFour;
-    public GameObject prefabFive;
+    public List<GameObject> prefabs;
 }

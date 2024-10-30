@@ -27,14 +27,4 @@ public class UI : MonoBehaviour
             timerText.text = gameManager.gameTime.ToString("00.00");
         }
     }
-
-    void OnTriggerEnter2D(Collider2D Player)
-    {
-        instructionsUI.SetActive(true);
-    }
-
-    void OnTriggerExit2D(Collider2D Player)
-    {
-        instructionsUI.SetActive(false);
-    }
 }

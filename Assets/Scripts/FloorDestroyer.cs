@@ -10,11 +10,12 @@ public class FloorDestroyer : MonoBehaviour
 
     private void Start()
     {
+        floor = transform.parent.gameObject;
         // get refence to floor prefab
     }
-
-    void OnTriggerEnter(Collider Player)
+    void OnTriggerEnter2D(Collider2D Player)
     {
+        Destroy(floor);
         //destroy prefab
     }
 }
