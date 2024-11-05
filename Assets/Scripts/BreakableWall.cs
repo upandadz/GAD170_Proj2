@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class BreakableWall : MonoBehaviour
 {
-    private Player player;
+    private PlayerStats playerStats;
+    private PlayerMovement playerMovement;
     private Rigidbody2D playerRB;
     private GameObject thisWall;
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        playerStats = FindObjectOfType<PlayerStats>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
         thisWall = this.gameObject;
-        playerRB = player.gameObject.GetComponent<Rigidbody2D>();
+        playerRB = playerMovement.gameObject.GetComponent<Rigidbody2D>();
     }
     void OnCollisionEnter2D(Collision2D Player)
     {
-        if (player.floating || player.coinCount == 10)
+        if (playerMovement.floating || playerStats.coinCount == 10)
         {
             Destroy(thisWall);
         }
         else
         {
             Destroy(thisWall);
-            player.health -= 1;
+            playerStats.health -= 1;
         }
     }
 }

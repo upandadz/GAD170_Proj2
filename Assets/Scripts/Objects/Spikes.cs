@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    private Player player;
+    private PlayerStats player;
     private GameManager gameManager;
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerStats>();
         gameManager = FindObjectOfType<GameManager>();
     }
     private void OnTriggerEnter2D(Collider2D Player)

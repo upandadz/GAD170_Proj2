@@ -7,14 +7,14 @@ public class Saw : MonoBehaviour
 {
     private GameManager gameManager;
     
-    private Player player;
+    private PlayerMovement player;
     private Rigidbody2D playerRB;
     private Transform sawTransform;
     
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerMovement>();
         playerRB = player.GetComponent<Rigidbody2D>();
         sawTransform = this.transform;
     }

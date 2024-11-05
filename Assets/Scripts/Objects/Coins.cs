@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    private Player player;
+    private PlayerStats player;
     private GameObject coinInstance;
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerStats>();
         coinInstance = this.gameObject;
     }
 

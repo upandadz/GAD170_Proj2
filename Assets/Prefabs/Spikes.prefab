@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7370580228794962026}
   - component: {fileID: 6436210514592101189}
   - component: {fileID: 3849028844993546757}
-  - component: {fileID: 3318061910591893516}
+  - component: {fileID: 7160109903612564690}
   m_Layer: 0
   m_Name: Spikes
   m_TagString: Spikes
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841e39ff2ec71554a8c12d6d6cc19999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &3318061910591893516
-BoxCollider2D:
+--- !u!68 &7160109903612564690
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -216,19 +216,17 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.9429953, y: -0.24716076}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.7711072, y: 0.5056785}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: -0.5050921}
+  - {x: -0.073111534, y: 0.008630127}
+  - {x: 1.9482346, y: 0.0065782964}
+  - {x: 2.4143438, y: -0.49726126}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &7456696046745344265
 GameObject:
   m_ObjectHideFlags: 0

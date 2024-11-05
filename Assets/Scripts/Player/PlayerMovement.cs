@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private PlayerStats playerStats;
     public GameManager gameManager;
     private SpriteRenderer spriteRenderer;
     [Space]
-    [Header("Player Stats")]
-    public int health = 3;
-    public int coinCount = 0;
     
     [Header("Ground check")]
     public Vector2 boxSize;
@@ -34,6 +32,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerStats = GetComponent<PlayerStats>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

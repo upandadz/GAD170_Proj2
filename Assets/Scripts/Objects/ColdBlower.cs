@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ColdBlower : MonoBehaviour
 {
-    private Player player;
+    private PlayerMovement player;
     private SpriteRenderer playerSpriteRenderer;
     private Rigidbody2D playerRB;
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerMovement>();
         playerRB = player.GetComponent<Rigidbody2D>();
         playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
     }
