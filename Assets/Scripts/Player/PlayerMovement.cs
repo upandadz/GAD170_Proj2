@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("States")] 
     public bool floating = false;
+    public bool frozen = false;
 
 
     void Start()
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (gameManager.gameStarted)
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
-            if (Input.GetMouseButtonDown(0) && CanJump() && !floating)
+            if (Input.GetMouseButtonDown(0) && CanJump() && !floating && !frozen)
             {
                 rb.gravityScale *= -1;
             }

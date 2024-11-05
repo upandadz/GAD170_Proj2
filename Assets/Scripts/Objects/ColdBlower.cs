@@ -26,11 +26,11 @@ public class ColdBlower : MonoBehaviour
 
     private IEnumerator FreezePlayer()
     {
-        player.floating = true;
+        player.frozen = true;
         playerSpriteRenderer.color = Color.cyan;
         yield return new WaitForSeconds(1f);
         playerSpriteRenderer.color = Color.white;
-        player.floating = false;
+        player.frozen = false;
     }
 
 }
