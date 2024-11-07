@@ -16,11 +16,14 @@ public class ColdBlower : MonoBehaviour
         playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
     }
 
-    void OnTriggerEnter2D(Collider2D Player)
+    void OnTriggerEnter2D(Collider2D Other)
     {
-        if (!player.floating)
+        if (Other.tag == "Player")
         {
-            StartCoroutine(FreezePlayer());
+            if (!player.floating)
+            {
+                StartCoroutine(FreezePlayer());
+            }
         }
     }
 

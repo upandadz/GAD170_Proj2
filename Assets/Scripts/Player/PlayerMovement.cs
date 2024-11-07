@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 10f;
     private Vector2 clampValue;
     private Vector2 velocity;
-    private float gravity;
+    public float gravity;
     private float timeToWait = 0;
     private bool canFloat = true;
 

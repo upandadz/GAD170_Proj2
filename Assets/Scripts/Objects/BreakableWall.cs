@@ -16,16 +16,16 @@ public class BreakableWall : MonoBehaviour
         thisWall = this.gameObject;
         playerRB = playerMovement.gameObject.GetComponent<Rigidbody2D>();
     }
-    void OnCollisionEnter2D(Collision2D Player)
+    void OnCollisionEnter2D(Collision2D Other)
     {
-        if (playerMovement.floating || playerStats.coinCount == 10)
+        if (Other.gameObject.tag == "Player")
         {
-            Destroy(thisWall);
-        }
-        else
-        {
-            Destroy(thisWall);
+            Destroy(thisWall); 
             playerStats.health -= 1;
+        }
+        else if (Other.gameObject.tag == "Bullet")
+        {
+            Destroy(thisWall);
         }
     }
 }
