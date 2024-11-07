@@ -23,6 +23,5 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       // Destroy(this.gameObject);
     }
 }

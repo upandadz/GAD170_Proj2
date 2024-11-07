@@ -15,6 +15,10 @@ public class UI : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    [Header("Scores")] 
+    public TMP_Text currentScore;
+    public TMP_Text highScore;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
