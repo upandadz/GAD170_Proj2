@@ -16,11 +16,6 @@ public class Coins : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D Player)
     {
         player.coinCount++;
-        if (player.coinCount > 10) // 10 is max coins to be collected
-        {
-            player.coinCount = 10;
-            // add to score increase
-        }
 
         if (coinInstance != null)
         {

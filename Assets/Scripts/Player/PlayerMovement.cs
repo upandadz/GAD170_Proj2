@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private PlayerStats playerStats;
+    private Shoot shoot;
     public GameManager gameManager;
     private SpriteRenderer spriteRenderer;
     [Space]
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerStats = GetComponent<PlayerStats>();
+        shoot = GetComponent<Shoot>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -59,7 +59,8 @@ public class PlayerMovement : MonoBehaviour
                 gravity = rb.gravityScale;
                 velocity = rb.velocity;
                 floating = true;
-                rb.gravityScale = 0;
+                rb.gravityScale = 0; // freezes player in place
+                shoot.ShootBullet();
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 spriteRenderer.color = Color.yellow;
             }
@@ -110,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
     private void ResetMotion()
     {
         timeToWait = 0;
+        shoot.ShootBullet();
         rb.gravityScale = gravity;
         rb.velocity = velocity;
         floating = false;

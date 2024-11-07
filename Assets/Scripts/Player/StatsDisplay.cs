@@ -11,9 +11,12 @@ public class StatsDisplay : MonoBehaviour
     public Sprite emptyHeart;
     public Image[] hearts;
     
-    [Header("Coins")]
+    [Header("Counters")]
     public TMP_Text coinText;
+    public TMP_Text enemiesKilledText;
     private PlayerStats playerStats;
+    
+    
 
     void Start()
     {
@@ -36,5 +39,8 @@ public class StatsDisplay : MonoBehaviour
         
         //coin display
         coinText.text = playerStats.coinCount.ToString();
+        
+        //enemies killed display
+        enemiesKilledText.text = playerStats.enemiesKilled.ToString();
     }
 }
