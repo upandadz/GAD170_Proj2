@@ -12,19 +12,16 @@ public class Spikes : MonoBehaviour
         player = FindObjectOfType<PlayerStats>();
         gameManager = FindObjectOfType<GameManager>();
     }
-    private void OnTriggerEnter2D(Collider2D Player)
+    private void OnTriggerEnter2D(Collider2D Other)
     {
-        player.health -= 1;
-        if (player.health <= 0)
+        if (Other.tag == "Player")
         {
-            gameManager.gameOver = true;
+            player.health -= 1;
+            player.coinCount -= 3;
+            if (player.coinCount < 0) // stop coints going into the negatives
+            {
+                player.coinCount = 0;
+            }
         }
-        
-        player.coinCount -= 3;
-        if (player.coinCount < 0)
-        {
-            player.coinCount = 0;
-        }
-        // update player health bar
     }
 }

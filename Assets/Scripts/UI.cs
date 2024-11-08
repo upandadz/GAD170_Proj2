@@ -35,14 +35,16 @@ public class UI : MonoBehaviour
         }
     }
 
-    void DeleteHighScore()
+    public void DeleteHighScore()
     {
         PlayerPrefs.DeleteKey("HighScore");
         highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
-    void RestartGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene("StartGame");
     }
+    
+    // DOTween to fade in
 }
