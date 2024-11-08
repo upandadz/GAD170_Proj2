@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public ButtonPress buttonPress;
     private PlayerStats playerStats;
+    private PlayerMovement playerMovement;
     
     public float gameTime;
 
@@ -18,10 +19,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
     void Update()
     {
-        if (gameStarted)
+        if (gameStarted && !gameOver)
         {
             gameTime += Time.deltaTime;
         }
@@ -30,11 +32,15 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+
+        if (gameOver)
+        {
+            playerMovement.rb.velocity = new Vector2(0, 0);
+        }
     }
 
     public void GameOver()
     {
-        gameStarted = false;
         score = (int)gameTime + playerStats.coinCount + 5 * playerStats.enemiesKilled;
         if (score > PlayerPrefs.GetInt("HighScore"))
         {
@@ -42,5 +48,4 @@ public class GameManager : MonoBehaviour
         }
         gameOver = true;
     }
-    // if game over, final score = time + enemies killed, coins collected
 }

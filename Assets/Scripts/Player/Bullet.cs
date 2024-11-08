@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float speed = 20f;
+    private float timer;
 
     void Start()
     {
@@ -15,6 +16,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         rb.velocity = transform.right * speed;
+        timer += Time.deltaTime;
+        if (timer >= 2f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

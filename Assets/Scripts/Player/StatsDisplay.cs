@@ -20,7 +20,7 @@ public class StatsDisplay : MonoBehaviour
 
     void Start()
     {
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = FindObjectOfType<PlayerStats>();
     }
     void Update()
     {

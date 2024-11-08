@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Shoot shoot;
     public GameManager gameManager;
     private SpriteRenderer spriteRenderer;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
         }
         
-        if (gameManager.gameStarted)
+        if (gameManager.gameStarted && !gameManager.gameOver)
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
             if (Input.GetMouseButtonDown(0) && CanJump() && !floating && !frozen)

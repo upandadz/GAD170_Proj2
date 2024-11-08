@@ -23,12 +23,10 @@ public class Saw : MonoBehaviour
     {
         if (Other.tag == "Player")
         {
-            gameManager.gameStarted = false;
             playerRB.gravityScale = 0;
-            playerRB.velocity = new Vector2(0, 0);
             // want to make it gradually go towards centre of saw & camera shake
             playerRB.position = new Vector2(sawTransform.position.x, sawTransform.position.y);
-            gameManager.gameOver = true;
+            gameManager.GameOver();
         }
     }
 }

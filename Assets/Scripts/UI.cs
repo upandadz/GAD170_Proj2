@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class UI : MonoBehaviour
 {
     public GameObject instructionsUI;
     private GameManager gameManager;
     
     public TextMeshProUGUI timerText;
-
-    [Header("HP bar")]
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
 
     [Header("Scores")] 
     public TMP_Text currentScore;
@@ -30,5 +27,22 @@ public class UI : MonoBehaviour
         {
             timerText.text = gameManager.gameTime.ToString("00.00");
         }
+
+        if (gameManager.gameOver)
+        {
+            currentScore.text = gameManager.score.ToString();
+            highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+        }
+    }
+
+    void DeleteHighScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene("StartGame");
     }
 }
