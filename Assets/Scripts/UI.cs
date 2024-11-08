@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class UI : MonoBehaviour
 {
     public GameObject instructionsUI;
@@ -10,10 +12,9 @@ public class UI : MonoBehaviour
     
     public TextMeshProUGUI timerText;
 
-    [Header("HP bar")]
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
+    [Header("Scores")] 
+    public TMP_Text currentScore;
+    public TMP_Text highScore;
 
     void Start()
     {
@@ -26,15 +27,24 @@ public class UI : MonoBehaviour
         {
             timerText.text = gameManager.gameTime.ToString("00.00");
         }
+
+        if (gameManager.gameOver)
+        {
+            currentScore.text = gameManager.score.ToString();
+            highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D Player)
+    public void DeleteHighScore()
     {
-        instructionsUI.SetActive(true);
+        PlayerPrefs.DeleteKey("HighScore");
+        highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
-    void OnTriggerExit2D(Collider2D Player)
+    public void RestartGame()
     {
-        instructionsUI.SetActive(false);
+        SceneManager.LoadScene("StartGame");
     }
+    
+    // DOTween to fade in
 }
