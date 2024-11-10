@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class CameraFollow : MonoBehaviour
 {
     public PlayerMovement player;
-    public int cameraXOffset;
+    private int cameraXOffset = 5;
     void LateUpdate()
     {
         transform.position = new Vector3(player.transform.position.x + cameraXOffset, transform.position.y, transform.position.z);

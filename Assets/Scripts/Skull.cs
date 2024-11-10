@@ -29,6 +29,7 @@ public class Skull : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("skull has been shot");
         if (health <= 0)
         {
             audioManager.PlaySFX(audioManager.audioList[4]);
