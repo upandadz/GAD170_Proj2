@@ -5,13 +5,10 @@ using UnityEngine.UIElements;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Player player;
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
-    void Update()
+    public PlayerMovement player;
+    public int cameraXOffset;
+    void LateUpdate()
     {
-        transform.position = new Vector3(player.transform.position.x + 3, transform.position.y, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x + cameraXOffset, transform.position.y, transform.position.z);
     }
 }
